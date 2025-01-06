@@ -1,6 +1,7 @@
 import HomePage from "./components/templates/HomePage"
 import Layout from "./layouts/layout"
 
+
 function App() {
 
   return (

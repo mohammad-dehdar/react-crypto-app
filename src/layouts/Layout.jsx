@@ -1,6 +1,6 @@
 
 
-function layout({children}) {
+function Layout({children}) {
   return (
     <>
     <header className="flex items-center justify-between bg-blue-400 py-2.5 px-5 mb-[150px] rounded-lg">
@@ -15,4 +15,4 @@ function layout({children}) {
   )
 }
 
-export default layout
+export default Layout
