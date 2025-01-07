@@ -1,32 +1,64 @@
-import { useState } from "react"
+import { useState } from "react";
 
+function Pagination({ page, setPage }) {
+    const totalPages = 10;
 
-function Pagination({page,setPage}) {
     const prevHandler = () => {
         if (page <= 1) return;
-        setPage((page) => page - 1)
-    }
+        setPage((page) => page - 1);
+    };
+
     const nextHandler = () => {
-        if (page >= 10) return;
-        setPage((page) => page + 1)
-    }
+        if (page >= totalPages) return;
+        setPage((page) => page + 1);
+    };
+
+    const renderPageNumbers = () => {
+        const pages = [];
+        let startPage = Math.max(1, page - 1);
+        let endPage = Math.min(totalPages, page + 1);
+
+        if (page === 1) {
+            endPage = Math.min(totalPages, 3);
+        } else if (page === totalPages) {
+            startPage = Math.max(1, totalPages - 2);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(
+                <p
+                    key={i}
+                    className={`inline-block border border-blue-400 w-[25px] text-center rounded-md cursor-pointer ${page === i ? "bg-blue-400 text-white" : ""}`}
+                    onClick={() => setPage(i)}
+                >
+                    {i}
+                </p>
+            );
+        }
+        return pages;
+    };
 
     return (
-        <div className="w-[400px] flex justify-between items-center m-auto mb-[100px]">
-
-            <button className="w-20 bg-blue-400 text-white py-[5px] px-2.5 rounded-md cursor-pointer text-sm" onClick={prevHandler}>Prev</button>
-            <p className={page !== 1 ? "inline-block border border-blue-400 w-[25px] text-center rounded-md" : "bg-blue-400 inline-block border border-blue-400 w-[25px] text-center rounded-md opacity-50"}>1</p>
-            <p className={page !== 2 ? "inline-block border border-blue-400 w-[25px] text-center rounded-md" : "bg-blue-400 inline-block border border-blue-400 w-[25px] text-center rounded-md opacity-50"}>2</p>
-            <span className="flex">
-                ...
-                {page > 2 && page < 9 && <><p className="bg-blue-400 inline-block border border-blue-400 w-[25px] text-center rounded-md opacity-50">{page}</p></>}
-                ...
-            </span>
-            <p className={page !== 9 ? "inline-block border border-blue-400 w-[25px] text-center rounded-md" : "bg-blue-400 inline-block border border-blue-400 w-[25px] text-center rounded-md opacity-50"}>9</p>
-            <p className={page !== 10 ? "inline-block border border-blue-400 w-[25px] text-center rounded-md" : "bg-blue-400 inline-block border border-blue-400 w-[25px] text-center rounded-md opacity-50"}>10</p>
-            <button className="w-20 bg-blue-400 text-white py-[5px] px-2.5 rounded-md cursor-pointer text-sm" onClick={nextHandler}>Next</button>
+        <div className="w-full flex justify-center items-center m-auto mb-[100px] space-x-2">
+            <button
+                className="w-20 bg-blue-400 text-white py-[5px] px-2.5 rounded-md cursor-pointer text-sm disabled:opacity-50"
+                onClick={prevHandler}
+                disabled={page <= 1}
+            >
+                Prev
+            </button>
+            <div className="flex space-x-1">
+                {renderPageNumbers()}
+            </div>
+            <button
+                className="w-20 bg-blue-400 text-white py-[5px] px-2.5 rounded-md cursor-pointer text-sm disabled:opacity-50"
+                onClick={nextHandler}
+                disabled={page >= totalPages}
+            >
+                Next
+            </button>
         </div>
-    )
+    );
 }
 
-export default Pagination
+export default Pagination;

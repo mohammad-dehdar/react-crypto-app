@@ -1,13 +1,12 @@
-
-import chartUp from "../../assets/chart-up.svg"
-import chartDown from "../../assets/chart-down.svg"
+import chartUp from "../../assets/chart-up.svg";
+import chartDown from "../../assets/chart-down.svg";
 import { RotatingLines } from "react-loader-spinner";
 import { marketChart } from "../../services/cryptoApi";
 
 function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
-    <div className="flex justify-center mt-[50px] mb-[100px] min-h-[1000px]">
-      {isLoading ?
+    <div className="flex justify-center mt-12 mb-24 min-h-[1000px]">
+      {isLoading ? (
         <RotatingLines
           visible={true}
           height="96"
@@ -19,30 +18,33 @@ function TableCoin({ coins, isLoading, currency, setChart }) {
           ariaLabel="rotating-lines-loading"
           wrapperStyle={{}}
           wrapperClass=""
-        /> : (
-          <table className="w-full border-collapse max-md:block max-md:overflow-x-scroll">
+        />
+      ) : (
+        <div className="w-full overflow-x-auto">
+          <table className="w-full border-collapse">
             <thead className="border-b-2">
-              <tr className="*:text-lg text-left  *:max-md:px-2.5 *:pb-5">
-                <th>Coin</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>24H</th>
-                <th>Total Volume</th>
-                <th></th>
+              <tr className="text-lg text-left pb-5">
+                <th className="px-4 py-2">Coin</th>
+                <th className="px-4 py-2">Name</th>
+                <th className="px-4 py-2">Price</th>
+                <th className="px-4 py-2">24H</th>
+                <th className="px-4 py-2">Total Volume</th>
+                <th className="px-4 py-2"></th>
               </tr>
             </thead>
             <tbody>
-              {coins.map((coin) =>
+              {coins.map((coin) => (
                 <TableRow key={coin.id} coins={coin} currency={currency} setChart={setChart} />
-              )}
+              ))}
             </tbody>
           </table>
-        )}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default TableCoin
+export default TableCoin;
 
 const TableRow = ({ coins, currency, setChart }) => {
   const {
@@ -57,30 +59,34 @@ const TableRow = ({ coins, currency, setChart }) => {
 
   const showChartHandler = async () => {
     try {
-      const res = await fetch(marketChart(id, currency))
+      const res = await fetch(marketChart(id, currency));
       const json = await res.json();
-      setChart({ ...json, coins })
+      setChart({ ...json, coins });
     } catch (err) {
-      setChart(null)
+      setChart(null);
     }
-  }
+  };
+
   return (
-    <tr className="h-20 border border-transparent border-b-gray-800 *:max-md:px-2.5">
-      <td>
-        <div className='flex  items-center cursor-pointer' onClick={showChartHandler}>
-          <img className='w-[25px] h-[25px] mr-2.5' src={image} alt="" />
-          <span className='uppercase text-gray-600 font-extrabold'>{symbol}</span>
+    <tr className="h-20 border-b border-gray-800 hover:bg-gray-100 transition-colors">
+      <td className="px-4 py-2">
+        <div className="flex items-center cursor-pointer" onClick={showChartHandler}>
+          <img className="w-6 h-6 mr-2.5" src={image} alt="" />
+          <span className="uppercase text-gray-600 font-extrabold">{symbol}</span>
         </div>
       </td>
-      <td>{name}</td>
-      <td>{currency === "jpy" ? "¥ " : currency === "eur" ? "€ " : "$ "}{current_price.toLocaleString()}</td>
-      <td className={price_change > 0 ? "text-green-300" : "text-rose-500"}>{price_change.toFixed(2)}%</td>
-      <td>{total_volume.toLocaleString()}</td>
-      <td>
-        <img className="min-w-[100px] min-h-[40px]"
-          src={price_change > 0 ? chartUp : chartDown}
-          alt="price_change_percentage_24h" />
+      <td className="px-4 py-2">{name}</td>
+      <td className="px-4 py-2">
+        {currency === "jpy" ? "¥ " : currency === "eur" ? "€ " : "$ "}
+        {current_price.toLocaleString()}
+      </td>
+      <td className={`px-4 py-2 ${price_change > 0 ? "text-green-500" : "text-red-500"}`}>
+        {price_change.toFixed(2)}%
+      </td>
+      <td className="px-4 py-2">{total_volume.toLocaleString()}</td>
+      <td className="px-4 py-2">
+        <img className="w-24 h-10" src={price_change > 0 ? chartUp : chartDown} alt="price_change_percentage_24h" />
       </td>
     </tr>
-  )
-}
+  );
+};
