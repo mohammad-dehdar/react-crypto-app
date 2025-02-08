@@ -14,13 +14,13 @@ function Chart({ chart, setChart }) {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full backdrop-blur-sm flex items-center justify-center">
-      <span
-        className="inline-block font-semibold bg-red-600 mt-8 ml-8 text-white w-8 h-8 text-center text-3xl leading-8 rounded-xl cursor-pointer transition-all ease-out hover:bg-red-500 hover:shadow-md"
-        onClick={() => setChart(null)}
-      >
-        X
-      </span>
-      <div className="w-full max-w-4xl m-auto p-5 mt-[50px] bg-slate-900/60 border backdrop-blur-lg border-slate-700 rounded-2xl">
+      <div className="relative w-full max-w-4xl m-auto p-5 mt-[50px] bg-slate-900/60 border backdrop-blur-lg border-slate-700 rounded-2xl">
+        <span
+          className="absolute top-6 left-[92%] inline-block font-semibold bg-red-600 text-white w-8 h-8 text-center text-3xl leading-8 rounded-xl cursor-pointer transition-all ease-out hover:bg-red-500 hover:shadow-md"
+          onClick={() => setChart(null)}
+        >
+          X
+        </span>
         <div className="flex items-center mb-[30px] mx-2.5">
           <img src={chart.coins.image} className="w-10 h-10 mr-5" />
           <p className="text-xl font-bold">{chart.coins.name}</p>
