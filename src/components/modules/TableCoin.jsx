@@ -68,7 +68,7 @@ const TableRow = ({ coins, currency, setChart }) => {
   };
 
   return (
-    <tr className="h-20 border-b border-gray-800 hover:bg-gray-100 transition-colors">
+    <tr className="h-20 border-b border-gray-800  transition-colors">
       <td className="px-4 py-2">
         <div className="flex items-center cursor-pointer" onClick={showChartHandler}>
           <img className="w-6 h-6 mr-2.5" src={image} alt="" />
