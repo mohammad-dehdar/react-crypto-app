@@ -16,7 +16,7 @@ function Chart({ chart, setChart }) {
     <div className="fixed top-0 left-0 w-full h-full backdrop-blur-sm flex items-center justify-center">
       <div className="relative w-full max-w-4xl m-auto p-5 mt-[50px] bg-slate-900/60 border backdrop-blur-lg border-slate-700 rounded-2xl">
         <span
-          className="absolute top-6 left-[92%] inline-block font-semibold bg-red-600 text-white w-8 h-8 text-center text-3xl leading-8 rounded-xl cursor-pointer transition-all ease-out hover:bg-red-500 hover:shadow-md"
+          className="absolute top-6 md:left-[92%] left-[88%] inline-block font-semibold bg-red-600 text-white w-8 h-8 text-center text-3xl leading-8 rounded-xl cursor-pointer transition-all ease-out hover:bg-red-500 hover:shadow-md"
           onClick={() => setChart(null)}
         >
           X
@@ -33,7 +33,7 @@ function Chart({ chart, setChart }) {
           <button className={`${type === "market_caps" ? "bg-blue-400" : ""} px-4 py-2 rounded-md`}>market caps</button>
           <button className={`${type === "total_volumes" ? "bg-blue-400" : ""} px-4 py-2 rounded-md`}>total volumes</button>
         </div>
-        <div className="flex flex-wrap justify-between mt-5 space-y-4 md:space-y-0">
+        <div className="flex flex-wrap items-baseline  text-center mt-5 space-y-4 md:space-y-0">
           <div className="flex-1">
             <p className="text-lg text-blue-400 font-bold">prices</p>
             <span>${chart.coins.current_price}</span>
