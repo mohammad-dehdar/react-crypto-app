@@ -23,7 +23,7 @@ function TableCoin({ coins, isLoading, currency, setChart }) {
         <div className="w-full overflow-x-auto">
           <table className="w-full border-collapse">
             <thead className="border-b-2">
-              <tr className="text-lg text-left pb-5">
+              <tr className="text-lg max-sm:text-base text-left pb-5">
                 <th className="px-4 py-2">Coin</th>
                 <th className="px-4 py-2">Name</th>
                 <th className="px-4 py-2">Price</th>
@@ -69,21 +69,21 @@ const TableRow = ({ coins, currency, setChart }) => {
 
   return (
     <tr className="h-20 border-b border-gray-800  transition-colors">
-      <td className="px-4 py-2">
+      <td className="px-4 py-2 max-sm:text-sm">
         <div className="flex items-center cursor-pointer" onClick={showChartHandler}>
           <img className="w-6 h-6 mr-2.5" src={image} alt="" />
           <span className="uppercase text-gray-600 font-extrabold">{symbol}</span>
         </div>
       </td>
-      <td className="px-4 py-2">{name}</td>
-      <td className="px-4 py-2">
+      <td className="px-4 py-2 max-sm:text-sm">{name}</td>
+      <td className="md:px-4 py-2 max-sm:text-sm">
         {currency === "jpy" ? "¥ " : currency === "eur" ? "€ " : "$ "}
         {current_price.toLocaleString()}
       </td>
-      <td className={`px-4 py-2 ${price_change > 0 ? "text-green-500" : "text-red-500"}`}>
+      <td className={`px-4 py-2 max-sm:text-sm ${price_change > 0 ? "text-green-500" : "text-red-500"}`}>
         {price_change.toFixed(2)}%
       </td>
-      <td className="px-4 py-2">{total_volume.toLocaleString()}</td>
+      <td className="px-4 py-2 max-sm:text-sm">{total_volume.toLocaleString()}</td>
       <td className="px-4 py-2">
         <img className="w-24 h-10" src={price_change > 0 ? chartUp : chartDown} alt="price_change_percentage_24h" />
       </td>
