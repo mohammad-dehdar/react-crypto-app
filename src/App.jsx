@@ -7,6 +7,7 @@ function App() {
   return (
     <Layout>
       <HomePage />
+      hello
     </Layout>
   )
 }
